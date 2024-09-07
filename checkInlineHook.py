@@ -1,4 +1,5 @@
 import pefile
+import sys
 
 def isNearJmp(first_bytes):
     if first_bytes[:1] == b'\xe9':
@@ -86,6 +87,6 @@ def process(cDLL, num_bytes):
                     print(f'[+] {func_name} :\n\t{instruction1}, {hex(hookFuncAddrAbs & mask)}\n\t{instruction2}\n')          
 
 if __name__ == '__main__':
-    cDLL = 'pefile.dll'
+    cDLL = sys.argv[1] if len(sys.argv) > 1 else 'pefile.dll'
     num_bytes = 12
     process(cDLL, num_bytes)
